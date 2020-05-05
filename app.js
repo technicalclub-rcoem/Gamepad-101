@@ -20,7 +20,6 @@ Stage(function(stage){
 		tile.i = obj.i;						//Position assigned on grid
 		tile.j = obj.j;
 		tile.sign = obj.sign;
-		Tiles[obj.i][obj.j]=tile;
 
 		tile.on('click',function(){ 		// Mouse-Click : stage
 			console.log("MouseClicked : i ="+tile.i+" , j="+tile.j+" , sign = "+tile.sign);
@@ -47,43 +46,93 @@ Stage(function(stage){
 			}
 
 		});
+
+		tile.enlarge = function(){
+			tile.tween(200).pin({
+            alpha : 1,
+            scale : 1.2,
+          });
+		}
+
+
+
+		Tiles[obj.i][obj.j]=tile;
+
+
 	}
 
 
 	check = function(){
 		if(Tiles[-1][-1].sign == Tiles[-1][0].sign && Tiles[-1][0].sign == Tiles[-1][1].sign && Tiles[-1][1].sign != '-'){
 			console.log(Tiles[-1][-1].sign, " wins");
+			Tiles[-1][-1].enlarge();
+			Tiles[-1][0].enlarge();
+			Tiles[-1][1].enlarge();
+			filled = 9 ;
 		}
 		else if(Tiles[0][-1].sign == Tiles[0][0].sign && Tiles[0][0].sign == Tiles[0][1].sign && Tiles[0][1].sign != '-'){
 			console.log(Tiles[0][-1].sign, " wins");
+			Tiles[0][-1].enlarge();
+			Tiles[0][0].enlarge();
+			Tiles[0][1].enlarge();
+			filled = 9 ;
 		}
 		else if(Tiles[1][-1].sign == Tiles[1][0].sign && Tiles[1][0].sign == Tiles[1][1].sign && Tiles[1][1].sign != '-'){
 			console.log(Tiles[1][-1].sign, " wins");
+			Tiles[1][-1].enlarge();
+			Tiles[1][0].enlarge();
+			Tiles[1][1].enlarge();
+			filled = 9 ;
 		}
 
 		else if(Tiles[-1][-1].sign == Tiles[0][-1].sign && Tiles[0][-1].sign == Tiles[1][-1].sign && Tiles[1][-1].sign != '-'){
 			console.log(Tiles[-1][-1].sign, " wins");
+			Tiles[-1][-1].enlarge();
+			Tiles[0][-1].enlarge();
+			Tiles[1][-1].enlarge();
+			filled = 9 ;
 		}
 		else if(Tiles[-1][0].sign == Tiles[0][0].sign && Tiles[0][0].sign == Tiles[1][0].sign && Tiles[1][0].sign != '-'){
 			console.log(Tiles[-1][0].sign, " wins");
+			Tiles[-1][0].enlarge();
+			Tiles[0][0].enlarge();
+			Tiles[1][0].enlarge();
+			filled = 9 ;
 		}
 		else if(Tiles[-1][1].sign == Tiles[0][1].sign && Tiles[0][1].sign == Tiles[1][1].sign && Tiles[1][1].sign != '-'){
 			console.log(Tiles[-1][1].sign, " wins");
+			Tiles[-1][1].enlarge();
+			Tiles[0][1].enlarge();
+			Tiles[1][1].enlarge();
+			filled = 9 ;
 		}
 
 		else if(Tiles[-1][-1].sign == Tiles[0][0].sign && Tiles[0][0].sign == Tiles[1][1].sign && Tiles[1][1].sign != '-'){
 			console.log(Tiles[-1][-1].sign, " wins");
+			Tiles[-1][-1].enlarge();
+			Tiles[0][0].enlarge();
+			Tiles[1][1].enlarge();
+			filled = 9 ;
 		}
 		else if(Tiles[-1][1].sign == Tiles[0][0].sign && Tiles[0][0].sign == Tiles[1][-1].sign && Tiles[1][-1].sign != '-'){
 			console.log(Tiles[-1][1].sign, " wins");
+			Tiles[-1][1].enlarge();
+			Tiles[0][0].enlarge();
+			Tiles[1][-1].enlarge();
+			filled = 9 ;
 		}
 
 		else if(filled==9){
 			console.log("draw");
+			filled = 9 ;
 		}
 
 	}
 
+	show = function(pos){
+		Tiles[0][0].enlarge();
+
+	}
 
 
 	restart = function(restart){
