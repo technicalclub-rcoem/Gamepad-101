@@ -56,10 +56,19 @@ Stage({
 			this.size(10,10,ratio);
 			ctx.scale(ratio,ratio);
 
-			ctx.moveTo(0,0);
-			ctx.lineTo(10,10);
-			ctx.moveTo(10,0);
-			ctx.lineTo(0,10);
+			ctx.moveTo(2,2);
+			ctx.lineTo(8,8);
+			ctx.moveTo(8,2);
+			ctx.lineTo(2,8);
+
+			ctx.lineWidth = 1;
+			ctx.stroke();
+		}),
+		'o' : Stage.canvas(function(ctx){
+			ratio = 10 ; 
+			this.size(10,10,ratio);
+			ctx.scale(ratio,ratio);
+			ctx.arc(5,5,3.5,3*Math.PI/2,2*Math.PI);
 
 			ctx.lineWidth = 1;
 			ctx.stroke();
