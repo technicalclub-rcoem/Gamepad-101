@@ -54,7 +54,9 @@ Stage(function(stage){
           });
 		}
 
-
+		tile.removetile = function(){
+			stage.remove(tile);
+		}
 
 		Tiles[obj.i][obj.j]=tile;
 
@@ -137,21 +139,21 @@ Stage(function(stage){
 
 	restart = function(restart){
 		
-		if(run>0){			
-			stage.remove(Tiles[-1][-1]);
-			stage.remove(Tiles[-1][0]);
-			stage.remove(Tiles[-1][1]);
-			stage.remove(Tiles[0][-1]);
-			stage.remove(Tiles[0][0]);
-			stage.remove(Tiles[0][1]);
-			stage.remove(Tiles[1][-1]);
-			stage.remove(Tiles[1][0]);
-			stage.remove(Tiles[1][1]);
+		if(run>0){	
+
+
+			for(var i=-1;i<=1;i++){
+				for(var j=-1;j<=1;j++){
+					Tiles[i][j].removetile();
+				}
+			}
 			console.log("cleared");
 		}
+
 		for(var i=-1;i<=1;i++){
 			Tiles[i]=[];
 			for(var j=-1;j<=1;j++){
+				
 				tile ={
 					i:i,
 					j:j,
