@@ -6,7 +6,5 @@ Stage(function(stage){
 		console.log("MouseClicked"); 
 	});
 
-	ddsjkjrf
-
 });
 
