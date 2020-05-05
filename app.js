@@ -12,21 +12,27 @@ Stage(function(stage){
 			offsetY : obj.j *10
 		});
 
-		var tile = Stage.image('-').appendTo(stage).pin('handle',0.5);
+		var tile = Stage.image(obj.sign).appendTo(stage).pin('handle',0.5);
 		tile.pin({
 			offsetX : obj.i *10,
 			offsetY : obj.j *10
 		});
 
+		tile.i = obj.i;						//Position assigned on grid
+		tile.j = obj.j;
+		tile.sign = obj.sign;
+
 		tile.on('click',function(){ 		// Mouse-Click : stage
-			console.log("MouseClicked");
+			console.log("MouseClicked : i ="+tile.i+" , j="+tile.j+" , sign = "+tile.sign);
 			if(turn == 1){
 				this.image('x');
 				turn = 2 ;
+				tile.sign = 'x';
 			}
 			else{
 				this.image('o');
 				turn = 1 ; 
+				tile.sign = 'o';
 			}
 
 		});
@@ -37,7 +43,8 @@ Stage(function(stage){
 		for(var j=-1;j<=1;j++){
 			tile = Tiles[i][j]={
 				i:i,
-				j:j
+				j:j,
+				sign : '-'
 			};
 
 			createTileGrid(tile);
