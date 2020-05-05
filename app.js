@@ -1,4 +1,6 @@
 Stage(function(stage){
+	Tiles = [];
+	turn = 1;
 
 	stage.viewbox(50,50).pin('handle',-0.5);
 
@@ -18,16 +20,27 @@ Stage(function(stage){
 
 		tile.on('click',function(){ 		// Mouse-Click : stage
 			console.log("MouseClicked");
-			this.image('x');
+			if(turn == 1){
+				this.image('x');
+				turn = 2 ;
+			}
+			else{
+				this.image('o');
+				turn = 1 ; 
+			}
+
 		});
 	}
 
 	for(var i=-1;i<=1;i++){
+		Tiles[i]=[];
 		for(var j=-1;j<=1;j++){
-			createTileGrid({
+			tile = Tiles[i][j]={
 				i:i,
 				j:j
-			});
+			};
+
+			createTileGrid(tile);
 		}
 	}
 });
@@ -68,7 +81,7 @@ Stage({
 			ratio = 10 ; 
 			this.size(10,10,ratio);
 			ctx.scale(ratio,ratio);
-			ctx.arc(5,5,3.5,3*Math.PI/2,2*Math.PI);
+			ctx.arc(5,5,3.5,0,2*Math.PI);
 
 			ctx.lineWidth = 1;
 			ctx.stroke();
