@@ -136,6 +136,7 @@ Stage(function(stage){
 
 
 	restart = function(restart){
+		turn=1;
 		
 		if(run>0){	
 
@@ -145,6 +146,7 @@ Stage(function(stage){
 					Tiles[i][j].removetile();
 				}
 			}
+
 			console.log("cleared");
 		}
 
