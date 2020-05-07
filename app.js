@@ -4,12 +4,17 @@ Stage(function(stage){
 	var filled = 0;
 	var run = 0;
 
+	//Creating a viewbox
 	stage.viewbox(50,50).pin('handle',-0.5);
+	
+	// The '#'  texture loaded  --- see bottom of the page
 	var space = Stage.image('bg0').appendTo(stage).pin('handle',0.5);		
 
+	// the placeholder of the 'o' or 'x' wins result
 	var resulttile = Stage.image('-').appendTo(stage).pin({handle: 0.5, offsetY :-20});
 
-
+	
+	//This method created one placeholder{TILE} for moves in the desired position
 	createTileGrid = function(obj){
 		
 		var tile = Stage.image(obj.sign).appendTo(stage).pin('handle',0.5);
@@ -22,8 +27,9 @@ Stage(function(stage){
 		tile.i = obj.i;						//Position assigned on grid
 		tile.j = obj.j;
 		tile.sign = obj.sign;
-
-		tile.on('click',function(){ 		// Mouse-Click : stage
+		
+		
+		tile.on('click',function(){ 		// adding the event to the tile click
 			console.log("MouseClicked : i ="+tile.i+" , j="+tile.j+" , sign = "+tile.sign);
 			console.log("filled",filled);
 			if(filled>=9){
@@ -48,20 +54,22 @@ Stage(function(stage){
 			}
 
 		});
-
+		
+		//Enlarges the texture it holds
 		tile.enlarge = function(){
 			tile.tween(200).pin({
-            alpha : 1,
-            scale : 1.2,
-          });
+			alpha : 1,
+		    	scale : 1.2,
+		});
 		}
 
+		//removes this tile from the stage
 		tile.removetile = function(){
 			stage.remove(tile);
 		}
 
+		//Assign every detail to global list of tiles >> Tiles[][]
 		Tiles[obj.i][obj.j]=tile;
-
 
 	}
 
@@ -70,6 +78,7 @@ Stage(function(stage){
 		filled=9;
 	}
 
+	// Check if the game has reached to a winning condition
 	check = function(){
 		if(Tiles[-1][-1].sign == Tiles[-1][0].sign && Tiles[-1][0].sign == Tiles[-1][1].sign && Tiles[-1][1].sign != '-'){
 			end_update(Tiles[-1][-1].sign);
@@ -135,9 +144,11 @@ Stage(function(stage){
 	}
 
 
+	//restart the game by removing and readding the tiles
 	restart = function(restart){
 		turn=1;
 		
+		//Because first run is always a start and not a restart
 		if(run>0){	
 
 
@@ -149,7 +160,8 @@ Stage(function(stage){
 
 			console.log("cleared");
 		}
-
+		
+		// the tiles in 3x3 grid and initialize with sign '-'
 		for(var i=-1;i<=1;i++){
 			Tiles[i]=[];
 			for(var j=-1;j<=1;j++){
@@ -166,11 +178,12 @@ Stage(function(stage){
 		run++;
 	}
 
-
+	//entry point in the game
 	restart(run);
 
 });
 
+//Holds all the textures in this game
 Stage({
 	textures : {
 		'bg0' : Stage.canvas(function(ctx) {
